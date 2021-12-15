@@ -7,6 +7,7 @@
 #include <ArduinoJson.h>
 #include <Pangodream_18650_CL.h>
 
+#include <GxEPD2_BW.h>
 #include <GxEPD2_3C.h>
 #include <Fonts/FreeMonoBold9pt7b.h>
 #include <Fonts/FreeMono9pt7b.h>
