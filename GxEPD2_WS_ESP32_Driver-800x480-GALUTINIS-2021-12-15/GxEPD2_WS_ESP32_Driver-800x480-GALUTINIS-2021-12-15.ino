@@ -41,46 +41,6 @@
 #define spyna_state_topic "skaidiskes/namai/spyna"
 #define programos_testas "programos/testas"
 
-const char* root_ca = \
-                      "-----BEGIN CERTIFICATE-----\n" \
-                      "MIIGvjCCBaagAwIBAgIRAKL7IEo7D+v9u0G4ItYCJYwwDQYJKoZIhvcNAQELBQAw\n" \
-                      "gY8xCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAO\n" \
-                      "BgNVBAcTB1NhbGZvcmQxGDAWBgNVBAoTD1NlY3RpZ28gTGltaXRlZDE3MDUGA1UE\n" \
-                      "AxMuU2VjdGlnbyBSU0EgRG9tYWluIFZhbGlkYXRpb24gU2VjdXJlIFNlcnZlciBD\n" \
-                      "QTAeFw0yMDAzMTcwMDAwMDBaFw0yMjA2MTkwMDAwMDBaMB8xHTAbBgNVBAMMFCou\n" \
-                      "b3BlbndlYXRoZXJtYXAub3JnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC\n" \
-                      "AQEA2DMTq6QbiQ6N/PK6u6dv8J1w5/w/GLm1d7J3daL80/15qRlsxUEpM78/OWmE\n" \
-                      "s60kKSfyOVyxOHrVoXMfEhIxATdYQtRtN2JQEFYDkRauvVgr5eXQO2EJZXBZUb2C\n" \
-                      "0dLFMD2WtrQGl7059kCOBlA/vX2+uTIQwFx/qZyVKkhzgdthtoDQ5jDzx7scDM0U\n" \
-                      "9c/be/aWNPzoJV1HK37luC0nHUyT0zDpXMt82DgoCRix9z9RzDNkyjsPW2qP/pOE\n" \
-                      "RpXk0z49jOFqtUxTtR9HfbKoeQ/RobxD2fG5P1cfunZ2lU3lyl5PeKbmMlSdSlci\n" \
-                      "4OuileGdauTqgU254X7bB/9iTQIDAQABo4IDgjCCA34wHwYDVR0jBBgwFoAUjYxe\n" \
-                      "xFStiuF36Zv5mwXhuAGNYeEwHQYDVR0OBBYEFP2HTXuP9/WVxbHQk4RHPpXCLktU\n" \
-                      "MA4GA1UdDwEB/wQEAwIFoDAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUF\n" \
-                      "BwMBBggrBgEFBQcDAjBJBgNVHSAEQjBAMDQGCysGAQQBsjEBAgIHMCUwIwYIKwYB\n" \
-                      "BQUHAgEWF2h0dHBzOi8vc2VjdGlnby5jb20vQ1BTMAgGBmeBDAECATCBhAYIKwYB\n" \
-                      "BQUHAQEEeDB2ME8GCCsGAQUFBzAChkNodHRwOi8vY3J0LnNlY3RpZ28uY29tL1Nl\n" \
-                      "Y3RpZ29SU0FEb21haW5WYWxpZGF0aW9uU2VjdXJlU2VydmVyQ0EuY3J0MCMGCCsG\n" \
-                      "AQUFBzABhhdodHRwOi8vb2NzcC5zZWN0aWdvLmNvbTAzBgNVHREELDAqghQqLm9w\n" \
-                      "ZW53ZWF0aGVybWFwLm9yZ4ISb3BlbndlYXRoZXJtYXAub3JnMIIB9gYKKwYBBAHW\n" \
-                      "eQIEAgSCAeYEggHiAeAAdwBGpVXrdfqRIDC1oolp9PN9ESxBdL79SbiFq/L8cP5t\n" \
-                      "RwAAAXDobGj8AAAEAwBIMEYCIQDuoxRU3qxvOhsXh/vQPwAzBQfmu0b76RYKY27r\n" \
-                      "3IjeuwIhAKhiaG0C9WMqsBNviTNJHl8iUZppSoDbreFWKU3ju715AHYA36Veq2iC\n" \
-                      "Tx9sre64X04+WurNohKkal6OOxLAIERcKnMAAAFw6GxoyAAABAMARzBFAiEAiPLZ\n" \
-                      "oR9BVGbeBKcZWWCWe5khT1jrbwqFFs1qqciHhmUCICNPG3dRIueExiu3HF6tUiNb\n" \
-                      "rlGF/mf9Efr3JkAkqGsZAHUAQcjKsd8iRkoQxqE6CUKHXk4xixsD6+tLx2jwkGKW\n" \
-                      "BvYAAAFw6Gxo7AAABAMARjBEAiAzzodBqseRU0wn7ukh37SvTOjmv8vpayKuZ4AE\n" \
-                      "ut06BAIgArnrQObBVZU87a6ubmSWGHPiEi8cyPYdqZkMVycT3TgAdgBvU3asMfAx\n" \
-                      "GdiZAKRRFf93FRwR2QLBACkGjbIImjfZEwAAAXDobGnaAAAEAwBHMEUCIGo9M7aa\n" \
-                      "TjzbYPbR16+gwPnAGNiZI0ujRTDXRUJsW+D8AiEAgexT/9i23R7/XZfh5sL1Q9E/\n" \
-                      "pE40zy1wXC1O3BHvz2MwDQYJKoZIhvcNAQELBQADggEBANJ4pa0tYp5QOtGy1RxM\n" \
-                      "hcX2WydaU89WwySUB41pxbXBvaRLQyFBzC/COjPyN6zR52irYeBr0uFLLmwkaZfg\n" \
-                      "eavkaExosslVP9g1js4j7wAKR5CdlEJfgw4eTxu8LAx5WUhm66HaMQol2neSyky2\n" \
-                      "XPZt4KvZC9Fk/0x28JpXbMpckpH1/VpWPz3ulQw1/9TgV0+saRpFaKVXoZT5IObo\n" \
-                      "j6cAp85OGBmRNJFypFFZRvy85aPJCP8IIyNoC9MoZIQ2VEuXQMTrIDU14Y46BTDq\n" \
-                      "HaolM6WQZl42iGBzqJcOF2PGzcZ5YUahZW1GMxwB3NCyugR93FMCwtM4Wip6Ja5Q\n" \
-                      "5fs=\n" \
-                      "-----END CERTIFICATE-----\n";
 
 
 #define uS_TO_S_FACTOR 1000000  /* Conversion factor for micro seconds to seconds */
@@ -100,14 +60,13 @@ const int mqtt_port = 1883;
 const char * willTopic = "$CONNECTED/CLIENT_ID";
 const char * solar_web = "http://192.168.8.137/solar_api/v1/GetPowerFlowRealtimeData.fcgi";
 const char * oruAPI = "http://api.openweathermap.org/data/2.5/weather?q=vilnius&units=metric&appid=35ac972ed30a9ed3e6ad8d09a895abf1";
+const char * dienaAPI = "https://savaites-diena-api.herokuapp.com/savaitesdiena";
+const char * menuoAPI = "https://savaites-diena-api.herokuapp.com/menuo";
 
 
 WiFiClient espClient;
 WiFiClientSecure clientA;
 PubSubClient client(espClient);
-
-//WiFiClientSecure espClient;
-//PubSubClient client(espClient);
 
 // Define NTP Client to get time
 WiFiUDP ntpUDP;
@@ -147,7 +106,7 @@ void setup()
   delay(1000);
 
   setup_wifi();
-  clientA.setCACert(root_ca);
+  //  clientA.setCACert(root_ca);
   Serial.println("setup");
   delay(100);
 
@@ -185,9 +144,10 @@ void setup()
   grazintiMenesioSkaiciu();
   grazintiMenesioPavadinima();
   gautiOruPrognoze();
+  dienosPavadinimas();
 
   display.powerOff();
-  //  deepSleepTest();
+
   Serial.println("setup done");
 }
 
@@ -215,6 +175,7 @@ void paveiksliukas() {
     String menesioPavadinimas = grazintiMenesioPavadinima();
     float laipsniai = gautiOruPrognoze();
     int laipsniaiInt = (int) laipsniai;
+    String savaitesDiena = dienosPavadinimas();
 
     Serial.println("===============");
     Serial.println(laipsniaiInt);
@@ -231,6 +192,7 @@ void paveiksliukas() {
     //        display.setCursor(220, 300);  // svetaines temp pozicija (x,y)
     //        display.print("-88");  // Print some text
 
+    display.getTextBounds(laipsniaiInt, 0,0, 220, 140, 200, 200);
     display.setCursor(220, 140);  // lauko temp pozicija (x,y)
     display.print(laipsniaiInt);  // Print some text
 
@@ -248,13 +210,13 @@ void paveiksliukas() {
     display.print(menesioPavadinimas);  // Print some text
 
     display.setCursor(30, 190);  // savaites dienos pavadinimas pozicija (x,y)
-    display.print("PENKTADIENIS");  // Print some text
+    display.print(savaitesDiena);  // Print some text
 
-    display.setCursor(30, 240);  // baseino temp pozicija (x,y)
-    display.print("SKAIDISKES");  // Print some text
-
-    display.setCursor(30, 280);  // baseino temp pozicija (x,y)
-    display.print(laipsniaiInt);  // Print some text
+//    display.setCursor(30, 240);  // baseino temp pozicija (x,y)
+//    display.print("SKAIDISKES");  // Print some text
+//
+//    display.setCursor(30, 280);  // baseino temp pozicija (x,y)
+//    display.print(laipsniaiInt);  // Print some text
 
     display.setFont( & FreeMono9pt7b);
     display.setCursor(80, 470); // atnaujinta (x,y)
@@ -269,9 +231,7 @@ void paveiksliukas() {
     display.setCursor(380, 470); // baterija (x,y)
     display.print(BL.getBatteryChargeLevel()); // Print some text (BL.getBatteryChargeLevel());
 
-//    display.setFont(&FreeMonoBold12pt7b);
-//    display.setCursor(650, 470);  // lauko durys (x,y)
-//    display.print("ATRAKINTA");  // Print some text
+    
 
   }
   while (display.nextPage()); // Print everything we set previously
@@ -344,7 +304,7 @@ void mqtt_siltnamis(char *topic, byte *payload) {
     }
     while (display.nextPage());
 
-    //    return payload;
+    
   }
 }
 
@@ -590,7 +550,7 @@ float solar_http() {
 
     String json = http.getString();
     Serial.println(httpCode);
-//    Serial.println(json); // reikalingas tik parodyti uzklausos turini, testavimui
+    //    Serial.println(json); // reikalingas tik parodyti uzklausos turini, testavimui
 
     const size_t capacity = JSON_OBJECT_SIZE(0) + 2 * JSON_OBJECT_SIZE(1) + JSON_OBJECT_SIZE(2) + 3 * JSON_OBJECT_SIZE(3) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(11) + 490;
     DynamicJsonBuffer jsonBuffer(capacity);
@@ -623,7 +583,7 @@ float gautiOruPrognoze() {
 
     String json = http.getString();
     Serial.println(httpCode);
-//    Serial.println(json); // reikalingas tik parodyti uzklausos turini, testavimui
+    //    Serial.println(json); // reikalingas tik parodyti uzklausos turini, testavimui
 
     const size_t capacity = JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(1) + 2 * JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(4) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(6) + JSON_OBJECT_SIZE(13) + 410;
     DynamicJsonBuffer jsonBuffer(capacity);
@@ -683,6 +643,28 @@ float gautiOruPrognoze() {
 
     //float prognoze[] = {main_temp,main_feels_like,main_humidity,main_temp_max,main_temp_min};
     return main_temp;
+  }
+  else {
+    Serial.println("NEGAUTA JOKIO ATSAKYMO IS API");
+  }
+  http.end(); //Free the resources
+}
+
+String dienosPavadinimas() {
+
+  http.begin(clientA, dienaAPI); //Specify the URL
+  http.addHeader("Content-Type", "application/json");
+  int httpCode = http.GET(); //Make the request
+
+  if (httpCode > 0) { //Check for the returning code
+
+    String json = http.getString();
+    Serial.println("kodas ===========>>>>");
+    Serial.println(httpCode);
+    Serial.println("payload ===========>>>>");
+    Serial.println(json); // reikalingas tik parodyti uzklausos turini, testavimui
+
+    return json;
   }
   else {
     Serial.println("NEGAUTA JOKIO ATSAKYMO IS API");
