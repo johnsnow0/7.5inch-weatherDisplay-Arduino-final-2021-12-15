@@ -47,11 +47,11 @@
 #define TIME_TO_SLEEP  900        /* Time ESP32 will go to sleep (in seconds) */
 #define Threshold 20
 
-const char* ssid = "Telia-F49C91-Greitas";
-const char* password = "11059C1715";
+//const char* ssid = "Telia-F49C91-Greitas";
+//const char* password = "11059C1715";
 
-//const char * ssid = "wifimesh";
-//const char* password = "EQR73445B5H";
+const char * ssid = "wifimesh";
+const char* password = "EQR73445B5H";
 
 const char * mqtt_server = "192.168.8.159";
 const char * mqtt_user = "vilkas";
@@ -62,6 +62,7 @@ const char * solar_web = "http://192.168.8.137/solar_api/v1/GetPowerFlowRealtime
 const char * oruAPI = "http://api.openweathermap.org/data/2.5/weather?q=vilnius&units=metric&appid=35ac972ed30a9ed3e6ad8d09a895abf1";
 const char * dienaAPI = "https://savaites-diena-api.herokuapp.com/savaitesdiena";
 const char * menuoAPI = "https://savaites-diena-api.herokuapp.com/menuo";
+const char * suo = "https://testas981.herokuapp.com/?pirmas=jonas&antras=petras";
 
 
 WiFiClient espClient;
@@ -175,7 +176,10 @@ void paveiksliukas() {
     String menesioPavadinimas = grazintiMenesioPavadinima();
     float laipsniai = gautiOruPrognoze();
     int laipsniaiInt = (int) laipsniai;
+    String laipsniaiString = String (laipsniaiInt);
     String savaitesDiena = dienosPavadinimas();
+
+    String belekas = "1";
 
     Serial.println("===============");
     Serial.println(laipsniaiInt);
@@ -192,9 +196,16 @@ void paveiksliukas() {
     //        display.setCursor(220, 300);  // svetaines temp pozicija (x,y)
     //        display.print("-88");  // Print some text
 
-    display.getTextBounds(laipsniaiInt, 0,0, 220, 140, 200, 200);
-    display.setCursor(220, 140);  // lauko temp pozicija (x,y)
-    display.print(laipsniaiInt);  // Print some text
+  int16_t x = 280; //220
+  int16_t y = 140;  //140
+  int16_t x1 = 278; //218
+  int16_t y1 = 138;
+  uint16_t width = 800;  //175
+  uint16_t height = 105;
+     
+    display.getTextBounds(laipsniaiString, x, y, &x1, &y1, &width, &height);
+    display.setCursor(x - width /3, y);  // lauko temp pozicija (x,y)
+    display.print(laipsniaiString);  // Print some text
 
     //       display.setCursor(415, 140);  // siltnamio temp pozicija (x,y)
     //       display.print("-88");  // Print some text
@@ -653,18 +664,26 @@ float gautiOruPrognoze() {
 String dienosPavadinimas() {
 
   http.begin(clientA, dienaAPI); //Specify the URL
-  http.addHeader("Content-Type", "application/json");
   int httpCode = http.GET(); //Make the request
 
   if (httpCode > 0) { //Check for the returning code
 
     String json = http.getString();
-    Serial.println("kodas ===========>>>>");
-    Serial.println(httpCode);
-    Serial.println("payload ===========>>>>");
-    Serial.println(json); // reikalingas tik parodyti uzklausos turini, testavimui
+//    Serial.println("kodas ===========>>>>");
+//    Serial.println(httpCode);
+//    Serial.println("payload ===========>>>>");
+//    Serial.println(json); // reikalingas tik parodyti uzklausos turini, testavimui
 
-    return json;
+const size_t capacity = JSON_OBJECT_SIZE(1) + 40;
+DynamicJsonBuffer jsonBuffer(capacity);
+
+//const char* json = "{\"savaitesdiena\":\"KETVIRTADIENIS\"}";
+
+JsonObject& root = jsonBuffer.parseObject(json);
+
+const char* savaitesdiena = root["savaitesdiena"]; // "KETVIRTADIENIS"
+
+    return savaitesdiena;
   }
   else {
     Serial.println("NEGAUTA JOKIO ATSAKYMO IS API");
