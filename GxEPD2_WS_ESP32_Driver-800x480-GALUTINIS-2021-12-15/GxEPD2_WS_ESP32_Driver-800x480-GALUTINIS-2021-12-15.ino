@@ -47,15 +47,15 @@
 #define TIME_TO_SLEEP  900        /* Time ESP32 will go to sleep (in seconds) */
 #define Threshold 20
 
-//const char* ssid = "Telia-F49C91-Greitas";
-//const char* password = "11059C1715";
+//const char* ssid = "";
+//const char* password = "";
 
-const char * ssid = "wifimesh";
-const char* password = "EQR73445B5H";
+const char * ssid = "";
+const char* password = "";
 
-const char * mqtt_server = "192.168.8.159";
-const char * mqtt_user = "vilkas";
-const char * mqtt_password = "labas123";
+const char * mqtt_server = "";
+const char * mqtt_user = "";
+const char * mqtt_password = "";
 const int mqtt_port = 1883;
 const char * willTopic = "$CONNECTED/CLIENT_ID";
 const char * solar_web = "http://192.168.8.137/solar_api/v1/GetPowerFlowRealtimeData.fcgi";
